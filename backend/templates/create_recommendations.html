@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: "Roboto", Helvetica, Arial, sans-serif;
+        font-weight: 100;
+        font-size: 12px;
+        line-height: 30px;
+        color: #777;
+        background: #fff;
+    }
+
+    .container {
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #contactus {
+        font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+        background: #f9f9f9;
+        padding: 25px;
+        margin: 150px 0;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    #contactus h3 {
+        display: block;
+        font-size: 30px;
+        font-weight: 300;
+        margin-bottom: 10px;
+    }
+
+    #contactus h4 {
+        margin: 5px 0 15px;
+        display: block;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    fieldset {
+        border: medium none !important;
+        margin: 0 0 10px;
+        min-width: 100%;
+        padding: 0;
+        width: 100%;
+    }
+
+    #contactus input[type="text"],
+    #contactus input[type="email"],
+    #contactus input[type="tel"],
+    #contactus input[type="url"],
+    #contactus textarea {
+        width: 100%;
+        border: 1px solid #ccc;
+        background: #fff;
+        margin: 0 0 5px;
+        padding: 10px;
+    }
+
+    #contactus input[type="text"]:hover,
+    #contactus input[type="email"]:hover,
+    #contactus input[type="tel"]:hover,
+    #contactus input[type="url"]:hover,
+    #contactus textarea:hover {
+        -webkit-transition: border-color 0.3s ease-in-out;
+        -moz-transition: border-color 0.3s ease-in-out;
+        transition: border-color 0.3s ease-in-out;
+        border: 1px solid #aaa;
+    }
+
+    #contactus textarea {
+        height: 100px;
+        max-width: 100%;
+        resize: none;
+    }
+
+    #contactus button[type="submit"] {
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        background: #000000;
+        color: #fff;
+        margin: 0 0 5px;
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    #contactus button[type="submit"]:active {
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    #contactus input:focus,
+    #contactus textarea:focus {
+        outline: 0;
+        border: 1px solid #aaa;
+    }
+
+    ::-webkit-input-placeholder {
+        color: #888;
+    }
+
+    :-moz-placeholder {
+        color: #888;
+    }
+
+    ::-moz-placeholder {
+        color: #888;
+    }
+
+    :-ms-input-placeholder {
+        color: #888;
+    }
+
+    label {
+        display: block;
+        font:
+            1rem 'Fira Sans',
+            sans-serif;
+    }
+
+    input,
+    label {
+        margin: 0.6rem 0;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    /* Your CSS styles here */
+</style>
+
+<body>
+    <div class="container">
+        <form id="contactus">
+            <h3>Book Recommendations</h3>
+            <fieldset>
+                <label for="title-id">Title</label>
+                <input placeholder="Title" type="text" name="title" id="title-id" tabindex="1" />
+            </fieldset>
+            <fieldset>
+                <label for="author-id">Author</label>
+                <input placeholder="Author" type="text" name="author" id="author-id" tabindex="2" />
+            </fieldset>
+            <fieldset>
+                <label for="genre-id">Genre</label>
+                <input placeholder="Genre" type="text" name="genre" id="genre-id" tabindex="3" />
+            </fieldset>
+            <fieldset>
+                <label for="rating-id">Rating</label>
+                <input placeholder="Rating (1-5)" type="text" name="rating" id="rating-id" tabindex="4" />
+            </fieldset>
+            <fieldset>
+                <label for="start-id">Published Date</label>
+                <input type="date" id="start-id" name="publication_date" tabindex="5" />
+            </fieldset>
+            <fieldset>
+                <label for="comments-id">Comments</label>
+                <textarea placeholder="Your comments..." id="comments-id" name="comments" tabindex="6"></textarea>
+            </fieldset>
+            <fieldset>
+                <button type="submit" id="contactus-submit">Get Recommendations</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contactus').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const title = document.getElementById('title-id').value;
+            const author = document.getElementById('author-id').value;
+            const genre = document.getElementById('genre-id').value;
+            const rating = document.getElementById('rating-id').value;
+            const publicationDate = document.getElementById('start-id').value;
+            const comments = document.getElementById('comments-id').value;
+
+            const data = {
+                //user: localStorage.getItem('current_user'),
+                book: {
+                    title: title,
+                    author: author,
+                    genre: genre,
+                    rating: rating,
+                    publication_date: publicationDate,
+                },
+                comments: comments
+            };
+            console.log(data);
+
+            const token = localStorage.getItem('access_token');
+            fetch('http://127.0.0.1:8000/recommendations/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Handle the response data here
+                    // You can display the recommendations or take other actions
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
