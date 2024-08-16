@@ -141,7 +141,7 @@ body {
                 localStorage.setItem('access_token', data.access);
                 localStorage.setItem('refresh_token', data.refresh);
                 alert('Login successful');
-                window.location.href = {% url 'search' %};
+                window.location.href = "{% url 'recommendations-list' %}";
             } else {
                 alert('Login failed');
             }

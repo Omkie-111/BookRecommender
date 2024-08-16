@@ -55,11 +55,9 @@ class RecommendationListCreateView(APIView):
         )
 
         data = RecommendationSerializer(filtered_recommendations, many=True).data
-        print(data)
         return Response(data)
 
     def post(self, request):
-        print(request.POST)
         serializer = RecommendationSerializer(
             data=request.data, context={"request": request}
         )
@@ -140,7 +138,6 @@ class AddCommentView(APIView):
 
 class RemoveCommentView(APIView):
     def delete(self, request, pk, comment_id):
-        print(request.user, pk, comment_id)
         try:
             comment = Comment.objects.get(
                 pk=comment_id, recommendation__id=pk, user=request.user
