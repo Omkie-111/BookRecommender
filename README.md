@@ -30,7 +30,7 @@ backend/
 │   ├── apps.py
 │   ├── serializers.py
 │   ├── urls.py
-│   └── views.py
+│   └── api_views.py
 ├── backend/
 │   ├── __init__.py
 │   ├── asgi.py
@@ -41,7 +41,7 @@ backend/
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
-│   ├── frontend_views.py
+│   ├── html_views.py
 │   ├── models.py
 │   ├── serializers.py
 │   ├── urls.py
@@ -54,8 +54,8 @@ backend/
 
 - **models.py:** Defines the database schema using Django ORM, including the `Book` and `Recommendation` models.
 - **serializers.py:** Handles data serialization and deserialization, crucial for converting complex data types (like querysets) into JSON.
-- **views.py:** Contains the logic for handling HTTP requests and returning appropriate responses. Implements functionalities such as fetching book data, filtering recommendations, and processing user input.
-- **frontend_views.py:** Contains logic for managing html templates
+- **api_views.py:** Contains the logic for handling HTTP requests and returning appropriate responses. Implements functionalities such as fetching book data, filtering recommendations, and processing user input.
+- **html_views.py:** Contains logic for managing html templates.
 - **urls.py:** Maps URLs to the corresponding views, defining the API's endpoints.
 
 ## Setup Instructions
@@ -103,7 +103,7 @@ To run tests, use the following command:
 python manage.py test
 ```
 
-## API Endpoints
+## Html API Endpoints
 
 ### Fetching Books from Google Books API
 
@@ -145,7 +145,7 @@ python manage.py test
 ### Example API Request
 
 ```bash
-curl -X GET "http://localhost:8000/books/recommendations/?genre=Fiction&min_rating=4"
+curl -X GET "http://localhost:8000/recommendations/?genre=Fiction&min_rating=4"
 ```
 
 ## Custom API Creation Guide
@@ -175,7 +175,7 @@ curl -X GET "http://localhost:8000/books/recommendations/?genre=Fiction&min_rati
 
 ### HTML & JavaScript
 
-- **Real-time Search Suggestions:** Implemented using AJAX to query the backend as the user types.
+- **Real-time Search Suggestions:** Implemented using on change event API call with a debounce to query the backend as the user types and avoid excessive calls.
 - **Dynamic Filtering Options:** Filters such as genre, rating, and publication date can be adjusted dynamically without page reloads.
 - **User Authentication:** JWT-based authentication with session management to personalize recommendations.
 
