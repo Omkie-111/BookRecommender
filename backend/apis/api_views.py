@@ -68,6 +68,8 @@ class RecommendationListCreateView(APIView):
 
 
 class RecommendationDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request, pk):
         try:
             recommendation = Recommendation.objects.get(pk=pk)
@@ -86,6 +88,8 @@ class RecommendationDetailView(APIView):
 
 
 class LikeRecommendationView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request, pk):
         recommendation = get_object_or_404(Recommendation, pk=pk)
         user = request.user
@@ -122,6 +126,8 @@ class LikeRecommendationView(APIView):
 
 
 class AddCommentView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request, pk):
         recommendation = Recommendation.objects.get(pk=pk)
         data = {
@@ -137,6 +143,8 @@ class AddCommentView(APIView):
 
 
 class RemoveCommentView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def delete(self, request, pk, comment_id):
         try:
             comment = Comment.objects.get(
