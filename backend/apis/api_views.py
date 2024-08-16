@@ -55,10 +55,11 @@ class RecommendationListCreateView(APIView):
         )
 
         data = RecommendationSerializer(filtered_recommendations, many=True).data
-
+        print(data)
         return Response(data)
 
     def post(self, request):
+        print(request.POST)
         serializer = RecommendationSerializer(
             data=request.data, context={"request": request}
         )

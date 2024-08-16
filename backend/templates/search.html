@@ -28,6 +28,7 @@
         border-radius: 40px;
         border: solid black 2px;
         padding: 10px;
+        position: relative;
     }
 
     .search_input {
@@ -66,6 +67,25 @@
         background-color: black;
     }
 
+    .suggestions {
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        background-color: white;
+        border: solid black 2px;
+        border-radius: 0 0 10px 10px;
+        z-index: 1000;
+    }
+
+    .suggestion-item {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .suggestion-item:hover {
+        background-color: #f0f0f0;
+    }
+
     a:link {
         text-decoration: none;
     }
@@ -77,6 +97,7 @@
             <div class="search">
                 <input class="search_input" id="search-input" type="text" placeholder="Search here..." />
                 <i id="search-button" class="fa fa-search"></i>
+                <div id="suggestions" class="suggestions"></div>
             </div>
         </div>
         <div id="total-books-count" class="text-center mt-3">
@@ -88,23 +109,65 @@
     </div>
 
     <script>
-        document.getElementById('search-button').addEventListener('click', function() {
+        let debounceTimeout;
+
+        document.getElementById('search-input').addEventListener('input', function() {
+            const query = this.value;
+
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                if (query.length > 2) { // Only fetch if query is longer than 2 characters
+                    fetch(`http://127.0.0.1:8000/search/?q=${query}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            displaySuggestions(data.books);
+                        })
+                        .catch(error => console.error('Error:', error));
+                } else {
+                    clearSuggestions();
+                }
+            }, 300); // Debounce time of 300ms
+        });
+
+        function displaySuggestions(books) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+            books.forEach(book => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.className = 'suggestion-item';
+                suggestionItem.textContent = `${book.title} by ${book.author || 'Unknown'}`;
+                suggestionItem.addEventListener('click', () => {
+                    document.getElementById('search-input').value = book.title;
+                    clearSuggestions();
+                    // Optionally, you could trigger the full search here as well
+                });
+                suggestionsContainer.appendChild(suggestionItem);
+            });
+        }
+
+        function clearSuggestions() {
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = '';
+        }
+
+        document.getElementById('search-button').addEventListener('click', function () {
             const query = document.getElementById('search-input').value;
             fetch(`http://127.0.0.1:8000/search/?q=${query}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
                     const books = data.books;
-    
+
                     // Check if books is an array
                     if (Array.isArray(books)) {
                         const booksContainer = document.getElementById('books');
-                        booksContainer.innerHTML = ''; 
-    
+                        booksContainer.innerHTML = '';
+
                         // Update the total books count
                         const totalBooksCountElement = document.getElementById('total-books-count');
                         totalBooksCountElement.textContent = `Total Books Found: ${books.length}`;
-    
+
                         books.forEach(book => {
                             const bookElement = document.createElement('div');
                             bookElement.className = 'col-md-4';
@@ -134,7 +197,7 @@
                 })
                 .catch(error => console.error('Error:', error));
         });
-    
+
         function renderStars(rating) {
             if (rating === null || rating === undefined) return '';
             const fullStars = Math.floor(rating);
@@ -143,7 +206,7 @@
             return `${'<i class="fa fa-star"></i>'.repeat(fullStars)}${'<i class="fa fa-star-half-o"></i>'.repeat(halfStars)}${'<i class="fa fa-star-o"></i>'.repeat(emptyStars)}`;
         }
     </script>
-    
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

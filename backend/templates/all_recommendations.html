@@ -162,6 +162,14 @@
 
             const queryString = `?genre=${encodeURIComponent(genre)}&min_rating=${encodeURIComponent(ratings)}&publication_date=${encodeURIComponent(publishedDate)}`;
 
+            fetchRecommendations(queryString);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchRecommendations('');
+        });
+
+        function fetchRecommendations(queryString) {
             const token = localStorage.getItem('access_token');
             fetch(`http://127.0.0.1:8000/recommendations/${queryString}`, {
                 method: 'GET',
@@ -181,21 +189,16 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const recommendations = JSON.parse(localStorage.getItem('recommendations'));
-
-            if (recommendations) {
-                displayRecommendations(recommendations);
-            } else {
-                document.getElementById('recommendations').innerHTML = 'No recommendations found.';
-            }
-        });
+        }
 
         function displayRecommendations(recommendations) {
             const recommendationsContainer = document.getElementById('recommendations');
             recommendationsContainer.innerHTML = '';
+
+            if (recommendations.length === 0) {
+                recommendationsContainer.innerHTML = 'No recommendations found.';
+                return;
+            }
 
             recommendations.forEach(rec => {
                 const comments = Array.isArray(rec.all_comments) ? rec.all_comments : [];
@@ -205,7 +208,7 @@
                 card.setAttribute('data-id', rec.id);
                 card.innerHTML = `
                     <h5>${rec.book.title}</h5>
-                    <h6><strong>Recommender:</strong> ${rec.user.username}</h6>
+                    <h6><strong>Recommender:</strong> ${rec.user}</h6>
                     <p><strong>Author:</strong> ${rec.book.author}</p>
                     <p><strong>Genre:</strong> ${rec.book.genre}</p>
                     <p><strong>Publication Date:</strong> ${rec.book.publication_date}</p>
@@ -230,12 +233,16 @@
                 `;
 
                 card.addEventListener('click', function () {
-                    window.location.href = `/recommends/${rec.id}/`;
+                    window.location.href = `/books/recommends/${rec.id}/`;
                 });
 
                 recommendationsContainer.appendChild(card);
             });
 
+            attachEventListeners();
+        }
+
+        function attachEventListeners() {
             document.querySelectorAll('.btn-like').forEach(button => {
                 button.addEventListener('click', function () {
                     const recommendationId = this.getAttribute('data-id');

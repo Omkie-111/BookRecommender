@@ -51,13 +51,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RecommendationSerializer(serializers.ModelSerializer):
     book = BookSerializer()  # Nested serializer to include book details
-    user = UserSerializer()
+    # user = UserSerializer()
     total_likes = serializers.SerializerMethodField()
     all_comments = serializers.SerializerMethodField()
 
     class Meta:
         model = Recommendation
-        fields = ["book", "comments", "user", "id", "total_likes", "all_comments"]
+        fields = ["book", "comments", "id", "total_likes", "all_comments"]
 
     def get_total_likes(self, obj):
         return obj.like_set.count()
@@ -73,6 +73,8 @@ class RecommendationSerializer(serializers.ModelSerializer):
         # Adding detailed book information
         book_data = BookSerializer(instance.book).data
         representation["book_details"] = book_data
+        user = instance.user.username
+        representation["user"] = str(user)
 
         return representation
 

@@ -196,7 +196,7 @@
             const comments = document.getElementById('comments-id').value;
 
             const data = {
-                //user: localStorage.getItem('current_user'),
+                user: localStorage.getItem('current_user'),
                 book: {
                     title: title,
                     author: author,
@@ -206,7 +206,6 @@
                 },
                 comments: comments
             };
-            console.log(data);
 
             const token = localStorage.getItem('access_token');
             fetch('http://127.0.0.1:8000/recommendations/', {
@@ -219,8 +218,8 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Handle the response data here
-                    // You can display the recommendations or take other actions
+                    alert("Recommendations added Successfully");
+                    window.location.href = "{% url 'recommendations-list' %}"; 
                 })
                 .catch(error => {
                     console.error('Error:', error);

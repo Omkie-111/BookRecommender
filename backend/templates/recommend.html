@@ -25,10 +25,6 @@
             position: relative;
         }
 
-        .recommendations {
-            margin-top: 20px;
-        }
-
         .recommendation-card {
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -86,7 +82,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const pathSegments = window.location.pathname.split('/');
-            const recommendationId = pathSegments[2]; // Assuming URL format is "/recommends/{id}/"
+            const recommendationId = pathSegments[3]; // Assuming URL format is "/recommends/{id}/"
 
             if (!recommendationId) {
                 console.error('Recommendation ID is missing from the URL.');
@@ -116,7 +112,7 @@
 
             detailsContainer.innerHTML = `
                 <h5>${rec.book.title}</h5>
-                <h6><strong>Recommender:</strong> ${rec.user.username}</h6>
+                <h6><strong>Recommender:</strong> ${rec.user}</h6>
                 <p><strong>Author:</strong> ${rec.book.author}</p>
                 <p><strong>Genre:</strong> ${rec.book.genre}</p>
                 <p><strong>Publication Date:</strong> ${rec.book.publication_date}</p>

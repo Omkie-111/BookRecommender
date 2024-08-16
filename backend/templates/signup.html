@@ -111,11 +111,11 @@ body {
 <body>
 <form class="login" id="login-form">
     <h2>Welcome, User!</h2>
-    <p>Please log in</p>
+    <p>Please Sign Up</p>
     <input type="text" id="username" placeholder="User Name" />
     <input type="email" id="email" placeholder="User email" />
     <input type="password" id="password" placeholder="Password" />
-    <input type="submit" value="Log In" />
+    <input type="submit" value="Sign Up" />
     <div class="links">
       <a href="#">Forgot password</a>
       <a href="{% url 'login' %}">Login</a>
@@ -140,7 +140,7 @@ body {
         .then(data => {
             if (data) {
                 alert('Signup successful');
-                window.location.href = {% url 'login'%};
+                window.location.href = "{% url 'login' %}";
             } else {
                 alert('Signup failed');
             }
