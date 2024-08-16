@@ -1,5 +1,41 @@
 # Book Recommendation Platform
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Features](#features)
+   - [Integration with Google Books API](#integration-with-google-books-api)
+   - [Community Book Recommendations](#community-book-recommendations)
+   - [API Creation Guide](#api-creation-guide)
+3. [Project Structure](#project-structure)
+   - [Key Components](#key-components)
+4. [Setup Instructions](#setup-instructions)
+   - [Prerequisites](#prerequisites)
+   - [Installation](#installation)
+5. [HTML API Endpoints](#html-api-endpoints)
+   - [Fetching Books from Google Books API](#fetching-books-from-google-books-api)
+   - [Submitting Book Recommendations](#submitting-book-recommendations)
+   - [Filtering and Sorting Recommendations](#filtering-and-sorting-recommendations)
+6. [API Endpoints](#api-endpoints)
+   - [User Signup](#user-signup-signup)
+   - [User Login](#user-login-login)
+   - [Book Search](#book-search-search)
+   - [List/Create Recommendations](#listcreate-recommendations-recommendations)
+   - [Recommendation Details](#recommendation-details-recommendationsintpk)
+   - [Like Recommendation](#like-recommendation-recommendationsintpklike)
+   - [Add Comment](#add-comment-recommendationsintpkcomments)
+   - [Remove Comment](#remove-comment-recommendationsintpkcommentsintcommentid)
+7. [Custom API Creation Guide](#custom-api-creation-guide)
+   - [Setting Up Django](#setting-up-django)
+   - [Defining Models](#defining-models)
+   - [Creating Serializers](#creating-serializers)
+   - [Writing Views](#writing-views)
+   - [URL Routing](#url-routing)
+   - [Best Practices](#best-practices)
+8. [Frontend Integration](#frontend-integration)
+   - [HTML & JavaScript](#html--javascript)
+9. [Conclusion](#conclusion)
+
 ## Overview
 
 This project is a backend application designed as a central hub for a community-driven platform focused on sharing and exploring book recommendations. The application integrates with the Google Books API to fetch book data and offers features for users to submit, filter, and explore book recommendations. Additionally, it includes an API creation guide to help developers create custom book-related functionalities.
@@ -96,14 +132,37 @@ backend/
    python manage.py runserver
    ```
 
-### Running Tests
+### HTML API endpoints
 
-To run tests, use the following command:
-```bash
-python manage.py test
-```
+Here's a brief documentation for each of the provided URLs, explaining their purpose and usage:
 
-## Html API Endpoints
+1. **Search (`"/books/"`)**
+   - **Endpoint:** `""` (root path)
+   - **Usage:** This endpoint serves as the search page. It is typically used to render a book search form.
+
+2. **Signup (`"/books/signup/"`)**
+   - **Endpoint:** `"signup/"`
+   - **Usage:** This endpoint is for user registration. It directs users to a signup page where they can create a new account by providing the necessary information.
+
+3. **Login (`"/books/login/"`)**
+   - **Endpoint:** `"login/"`
+   - **Usage:** This endpoint is used for user authentication. It directs users to a login page where they can enter their credentials to access their accounts.
+
+4. **Get Recommendation (`"/books/recommends/<int:pk>/"`)**
+   - **Endpoint:** `"recommends/<int:pk>/"`
+   - **Usage:** This endpoint is used to retrieve details of a specific recommendation based on its primary key (`pk`).
+
+5. **Recommendation Details (`"/books/recommendation_details"`)**
+   - **Endpoint:** `"recommendation_details"`
+   - **Usage:** This endpoint is used to display a list of recommendations. It likely returns a page with a summary or detailed list of all recommendations stored in the system.
+
+6. **Create Recommendation (`"/books/create-recommendations/"`)**
+   - **Endpoint:** `"create-recommendations/"`
+   - **Usage:** This endpoint allows users to create new recommendations. It likely presents a form for users to fill in details and submit a new recommendation to be stored in the system.
+
+These URLs represent different functionalities in the application, allowing users to search, view recommendations, authenticate, and manage their accounts.
+
+## Example Html API Endpoints
 
 ### Fetching Books from Google Books API
 
@@ -141,6 +200,44 @@ python manage.py test
   - `min_rating`: Filter by minimum rating
   - `publication_date`: Filter by publication date
   - `sort_by`: Sort results (e.g., `rating`, `-rating`, `publication_date`, `-publication_date`)
+
+### API Endpoints
+
+Here’s a concise documentation for each endpoint, focusing on the endpoint URL and its usage:
+
+1. **User Signup (`"signup/"`)**
+   - **Endpoint:** `"signup/"`
+   - **Usage:** Allows users to register for a new account using the `UserSignupView`. This is typically used to create a new user account.
+
+2. **User Login (`"login/"`)**
+   - **Endpoint:** `"login/"`
+   - **Usage:** Authenticates users and provides access to their account using the `UserLoginView`. This is used for logging into an existing account.
+
+3. **Book Search (`"search/"`)**
+   - **Endpoint:** `"search/"`
+   - **Usage:** Allows users to search for books using the `BookSearchView`. This endpoint is typically used to filter and retrieve book data based on search criteria.
+
+4. **List/Create Recommendations (`"recommendations/"`)**
+   - **Endpoint:** `"recommendations/"`
+   - **Usage:** Displays a list of recommendations or allows users to create a new recommendation using the `RecommendationListCreateView`. It’s used to manage recommendation data.
+
+5. **Recommendation Details (`"recommendations/<int:pk>/"`)**
+   - **Endpoint:** `"recommendations/<int:pk>/"`
+   - **Usage:** Retrieves, updates, or deletes a specific recommendation based on its primary key (`pk`) using the `RecommendationDetailView`. It’s used for detailed management of a single recommendation.
+
+6. **Like Recommendation (`"recommendations/<int:pk>/like/"`)**
+   - **Endpoint:** `"recommendations/<int:pk>/like/"`
+   - **Usage:** Allows users to like a specific recommendation using the `LikeRecommendationView`. It’s used to express approval or support for a recommendation.
+
+7. **Add Comment (`"recommendations/<int:pk>/comments/"`)**
+   - **Endpoint:** `"recommendations/<int:pk>/comments/"`
+   - **Usage:** Allows users to add a comment to a specific recommendation using the `AddCommentView`. It’s used to contribute feedback or opinions on a recommendation.
+
+8. **Remove Comment (`"recommendations/<int:pk>/comments/<int:comment_id>/`")**
+   - **Endpoint:** `"recommendations/<int:pk>/comments/<int:comment_id>/"`
+   - **Usage:** Allows users to remove a specific comment from a recommendation using the `RemoveCommentView`. It’s used to delete feedback or opinions previously provided.
+
+These endpoints represent different API actions, providing users with functionalities for user management, searching, interacting with recommendations, and handling comments.
 
 ### Example API Request
 
